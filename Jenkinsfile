@@ -3,29 +3,85 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                echo "========executing Build========"
+                echo "Maven Was used to automate the build process, plus it compiled and pakaged the code"
             }
             post{
                 success{
                     mail to: "usmanajazkhan@gmail.com",
                     subject: "Jenkins Build report",
-                    body: "the build was successfull yipee"
+                    body: "the build with maven was successfull"
+                }
+                failure{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Jenkins Build report",
+                    body: "Unfortunately the Build couldnt be compeleted successfully"
                 }
             }
         }
-        stage("Test"){
+        stage("Unit and Integration Tests"){
             steps{
-                echo "========Testing========"
+                echo "JUnit and selenium were used to perform unit and integration tests To ensure code runs as expected And all the components of application come together as expected"
+            }
+            post{
+                success{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Unit and Integration Tests report",
+                    body: "Unit and Integration Tests went well and this stage of devvelopment is clear"
+                }
+                failure{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Unit and Integration Tests report",
+                    body: "Unfortunately the Unit and Integration Tests couldnt be compeleted successfully"
+                }
             }
         }
-        stage("Deploy"){
+        stage("Code Analysis"){
             steps{
-                echo "========Deployingd========"
+                echo "Sonar Qube was used to analyse code to make sure it meets industry standards"
             }
         }
-        stage("Complete"){
+        stage("Security Scan"){
             steps{
-                echo "========Completed========"
+                echo "OWASP ZAP is used To scan the code and identify the vulnerabilities and perform a security scan"
+            }
+            post{
+                success{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Security Scan report",
+                    body: "Great News! Security Scan was successfull "
+                }
+                failure{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Security Scan report",
+                    body: "Unfortunately! the Security Scan report couldnt be compeleted successfully"
+                }
+            }
+        }
+        stage("Deploy to Staging"){
+            steps{
+                echo "Jenkins to deploy to staging"
+            }
+        }
+        stage(" Integration Tests on Staging"){
+            steps{
+                echo "Apache JMeter is used to run integration tests on the staging environment to ensure the application functions as expected in a production-lik environment."
+            }
+            post{
+                success{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Integration Tests on Staging report",
+                    body: "Integration Tests on Staging was successfull"
+                }
+                failure{
+                    mail to: "usmanajazkhan@gmail.com",
+                    subject: "Integration Tests on Staging report",
+                    body: "Unfortunately the Integration Tests on Staging report couldnt be compeleted successfully"
+                }
+            }
+        }
+        stage("Deploy to Production"){
+            steps{
+                echo "Using Jenkins to deploy to production server"
             }
         }
 
