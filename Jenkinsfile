@@ -75,7 +75,7 @@ pipeline{
                 failure{
                     mail to: "usmanajazkhan@gmail.com",
                     subject: "Integration Tests on Staging report",
-                    body: "Unfortunately! the Integration Test on Staging report couldnt be compeleted successfully"
+                    body: "Unfortunate the Integration Test on Staging report couldnt be compeleted successfully"
                 }
             }
         }
